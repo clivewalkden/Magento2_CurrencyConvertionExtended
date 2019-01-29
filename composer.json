@@ -1,5 +1,5 @@
 {
-    "name": "sozodesign/magento2-currencyconvertionextended",
+    "name": "clivewalkden/magento2-currencyconvertionextended",
     "description": "A plugin for Magento 2 that adds additional currency converters",
     "type": "magento2-module",
     "homepage": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended",
@@ -16,9 +16,9 @@
         "magento/framework": ">=100.0.0"
     },
     "support": {
-        "issues": "https://github.com/sozo-design/Magento2_CurrencyConvertionExtended/issues",
+        "issues": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended/issues",
         "source": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended",
-        "docs": "https://github.com/sozo-design/Magento2_CurrencyConvertionExtended/blob/master/README.md"
+        "docs": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended/blob/master/README.md"
     },
     "autoload": {
         "files": [
