@@ -78,10 +78,11 @@ class CurrencyConverter extends \Magento\Directory\Model\Currency\Import\Abstrac
                 ->getBody();
 
             $data = $this->jsonHelper->jsonDecode($response);
-            if (isset($data[$key]['val'])) {
-                $result = (float)$data[$key]['val'];
+            if (isset($data[$key])) {
+                $result = (float)$data[$key];
             } else {
                 $this->_messages[] = __('We can\'t retrieve a rate from %1.', $url);
+                $this->_messages[] = __('Key %1', $key);
             }
         } catch (\Exception $e) {
             if ($retry == 0) {
