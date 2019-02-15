@@ -4,9 +4,9 @@ namespace Sozo\CurrencyConversionExtended\Model\Currency\Import;
 
 use Magento\Directory\Model\CurrencyFactory;
 use Magento\Directory\Model\Currency\Import\AbstractImport;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Store\Model\ScopeInterface;
-use Sozo\ProductFeatures\Logger\SozoLogger;
 
 /**
  * Currency rate import model (From https://free.currencyconverterapi.com/)
@@ -34,34 +34,27 @@ class FreeCurrencyConverterApi extends AbstractImport
 
     protected $accessKey;
 
-    protected $logger;
-
     /**
      * Initialize dependencies
      *
      * @param CurrencyFactory $currencyFactory
      * @param ScopeConfigInterface $scopeConfig
      * @param ZendClientFactory $httpClientFactory
-     * @param SozoLogger $logger
      */
     public function __construct(
         CurrencyFactory $currencyFactory,
         ScopeConfigInterface $scopeConfig,
-        ZendClientFactory $httpClientFactory,
-        SozoLogger $logger
+        ZendClientFactory $httpClientFactory
     )
     {
         parent::__construct($currencyFactory);
         $this->scopeConfig = $scopeConfig;
         $this->httpClientFactory = $httpClientFactory;
-        $this->logger = $logger;
 
         $this->accessKey = $this->scopeConfig->getValue(
             'currency/currency_converter/api_key',
             ScopeInterface::SCOPE_STORE
         );
-
-        $this->logger->addDebug('Model loaded');
     }
 
     /**
@@ -92,9 +85,16 @@ class FreeCurrencyConverterApi extends AbstractImport
      */
     private function convertBatch($data, $currencyFrom, $currenciesTo)
     {
+        if (empty($this->accessKey)) {
+            $this->_messages[] = __('No API key was specified or an invalid API key was specified');
+            $data[$currencyFrom] = $this->makeEmptyResponse($currenciesTo);
+            return $data;
+        }
+
         foreach ($currenciesTo as $to) {
             set_time_limit(0);
             try {
+                $key = $currencyFrom . '_' . $to;
                 $url = str_replace('{{API_KEY}}', $this->accessKey, self::CURRENCY_CONVERTER_URL);
                 $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, $url);
                 $url = str_replace('{{CURRENCY_TO}}', $to, $url);

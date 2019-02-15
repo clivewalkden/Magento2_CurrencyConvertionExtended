@@ -4,7 +4,7 @@
     <default>
         <currency>
             <currency_converter>
-                <api_key></api_key>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"></api_key>
                 <timeout>100</timeout>
             </currency_converter>
         </currency>
