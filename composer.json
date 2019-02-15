@@ -1,8 +1,8 @@
 {
-    "name": "clivewalkden/magento2-currencyconvertionextended",
+    "name": "sozodesign/magento2-currencyconversionextended",
     "description": "A plugin for Magento 2 that adds additional currency converters",
     "type": "magento2-module",
-    "homepage": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended",
+    "homepage": "https://github.com/sozo-design/Magento2_CurrencyConversionExtended",
     "authors": [
         {
             "name": "Clive Walkden",
@@ -13,19 +13,20 @@
     ],
     "license": "OSL-3.0",
     "require": {
-        "magento/framework": ">=100.0.0"
+        "magento/framework": ">=100.0.0",
+        "ext-json": "*"
     },
     "support": {
-        "issues": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended/issues",
-        "source": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended",
-        "docs": "https://github.com/clivewalkden/Magento2_CurrencyConvertionExtended/blob/master/README.md"
+        "issues": "https://github.com/sozo-design/Magento2_CurrencyConversionExtended/issues",
+        "source": "https://github.com/sozo-design/Magento2_CurrencyConversionExtended",
+        "docs": "https://github.com/sozo-design/Magento2_CurrencyConversionExtended/blob/master/README.md"
     },
     "autoload": {
         "files": [
             "registration.php"
         ],
         "psr-4": {
-            "Sozo\\CurrencyConvertionExtended\\": ""
+            "Sozo\\CurrencyConversionExtended\\": ""
         }
     }
 }

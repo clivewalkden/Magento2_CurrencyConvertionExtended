@@ -4,6 +4,7 @@
     <default>
         <currency>
             <currency_converter>
+                <api_key></api_key>
                 <timeout>100</timeout>
             </currency_converter>
         </currency>

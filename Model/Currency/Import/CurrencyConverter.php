@@ -1,52 +1,52 @@
 <?php
 
-namespace Sozo\CurrencyConvertionExtended\Model\Currency\Import;
+namespace Sozo\CurrencyConversionExtended\Model\Currency\Import;
+
+use Magento\Directory\Model\CurrencyFactory;
+use Magento\Directory\Model\Currency\Import\AbstractImport;
+use Magento\Framework\HTTP\ZendClientFactory;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Currency rate import model (From https://free.currencyconverterapi.com/)
  */
-class CurrencyConverter extends \Magento\Directory\Model\Currency\Import\AbstractImport
+class CurrencyConverter extends AbstractImport
 {
     /**
      * @var string
      */
-    const CURRENCY_CONVERTER_URL = 'https://free.currencyconverterapi.com/api/v6/convert?q={{CURRENCY_FROM}}_{{CURRENCY_TO}}&compact=ultra';
-
-    /** @var \Magento\Framework\Json\Helper\Data */
-    protected $jsonHelper;
+    const CURRENCY_CONVERTER_URL = 'https://free.currencyconverterapi.com/api/v6/convert?apiKey={{API_KEY}}&q={{CURRENCY_FROM}}_{{CURRENCY_TO}}&compact=ultra';
 
     /**
      * Http Client Factory
      *
-     * @var \Magento\Framework\HTTP\ZendClientFactory
+     * @var ZendClientFactory
      */
     protected $httpClientFactory;
 
     /**
      * Core scope config
      *
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     * @var ScopeConfigInterface
      */
     private $scopeConfig;
 
     /**
      * Initialize dependencies
      *
-     * @param \Magento\Directory\Model\CurrencyFactory $currencyFactory
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Framework\HTTP\ZendClientFactory $httpClientFactory
-     * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     * @param CurrencyFactory $currencyFactory
+     * @param ScopeConfigInterface $scopeConfig
+     * @param ZendClientFactory $httpClientFactory
      */
     public function __construct(
-        \Magento\Directory\Model\CurrencyFactory $currencyFactory,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Framework\HTTP\ZendClientFactory $httpClientFactory,
-        \Magento\Framework\Json\Helper\Data $jsonHelper
-    ) {
+        CurrencyFactory $currencyFactory,
+        ScopeConfigInterface $scopeConfig,
+        ZendClientFactory $httpClientFactory
+    )
+    {
         parent::__construct($currencyFactory);
         $this->scopeConfig = $scopeConfig;
         $this->httpClientFactory = $httpClientFactory;
-        $this->jsonHelper = $jsonHelper;
     }
 
     /**
@@ -60,13 +60,19 @@ class CurrencyConverter extends \Magento\Directory\Model\Currency\Import\Abstrac
         $result = null;
         $timeout = (int)$this->scopeConfig->getValue(
             'currency/google/timeout',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE
+        );
+
+        $accessKey = $this->scopeConfig->getValue(
+            'currency/currency_converter/api_key',
+            ScopeInterface::SCOPE_STORE
         );
 
         $key = $currencyFrom . '_' . $currencyTo;
 
         $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, self::CURRENCY_CONVERTER_URL);
         $url = str_replace('{{CURRENCY_TO}}', $currencyTo, $url);
+        $url = str_replace('{{API_KEY}}', $accessKey, $url);
 
         /** @var \Magento\Framework\HTTP\ZendClient $httpClient */
         $httpClient = $this->httpClientFactory->create();
@@ -77,7 +83,7 @@ class CurrencyConverter extends \Magento\Directory\Model\Currency\Import\Abstrac
                 ->request('GET')
                 ->getBody();
 
-            $data = $this->jsonHelper->jsonDecode($response);
+            $data = json_decode($response, true);
             if (isset($data[$key])) {
                 $result = (float)$data[$key];
             } else {

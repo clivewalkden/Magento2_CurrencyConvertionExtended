@@ -6,6 +6,12 @@
             <group id="currency_converter" translate="label" sortOrder="41" showInDefault="1" showInWebsite="0"
                    showInStore="0">
                 <label>The Free Currency Converter API</label>
+
+                <field id="api_key" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>API Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
                 <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
                        showInStore="0">
                     <label>Connection Timeout in Seconds</label>

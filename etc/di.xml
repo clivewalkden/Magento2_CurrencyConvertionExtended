@@ -7,7 +7,7 @@
                 <item name="freeCurrencyConverter" xsi:type="array">
                     <item name="label" xsi:type="string">The Free Currency Converter API</item>
                     <item name="class" xsi:type="string">
-                        Sozo\CurrencyConvertionExtended\Model\Currency\Import\CurrencyConverter
+                        Sozo\CurrencyConversionExtended\Model\Currency\Import\CurrencyConverter
                     </item>
                 </item>
             </argument>

@@ -1,4 +1,4 @@
-# Magento 2 Currency Convertion Extended Module Usage Guide
+# Magento 2 Currency Conversion Extended Module Usage Guide
 
 **Via the Magento 2 Admin:**
 1. Log into your admin site 
