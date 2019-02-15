@@ -15,4 +15,4 @@ Free edition now requires a free API key which can be obtained from the [website
 See the [installation.md](./Guides/INSTALLATION.md) guide
 
 ## Usage
-see the [usage.md](./Guides/USAGE.MD) guide
+see the [usage.md](./Guides/USAGE.md) guide
