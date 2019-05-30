@@ -105,6 +105,9 @@ class FreeCurrencyConverterApi extends AbstractImport
                     if (empty($response)) {
                         $this->_messages[] = __('We can\'t retrieve a rate from %1 for %2.', $url, $to);
                         $data[$currencyFrom][$to] = null;
+                    } elseif (isset($response['status']) && $response['status'] == 400) {
+                        $this->_messages[] = __($response['error']);
+                        $data[$currencyFrom][$to] = null;
                     } else {
                         $data[$currencyFrom][$to] = $this->_numberFormat(
                             (double)$response[$currencyFrom . '_' . $to]
@@ -117,6 +120,7 @@ class FreeCurrencyConverterApi extends AbstractImport
         }
         return $data;
     }
+
     /**
      * Get CurrencyConverterApi service response
      *
