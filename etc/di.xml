@@ -5,7 +5,7 @@
         <arguments>
             <argument name="servicesConfig" xsi:type="array">
                 <item name="freeCurrencyConverter" xsi:type="array">
-                    <item name="label" xsi:type="string">The Free Currency Converter API</item>
+                    <item name="label" xsi:type="string">The Free Currency Converter API (SOZO)</item>
                     <item name="class" xsi:type="string">
                         Sozo\CurrencyConversionExtended\Model\Currency\Import\FreeCurrencyConverterApi
                     </item>
