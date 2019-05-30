@@ -8,7 +8,7 @@ Adds additional currency converters to your Magento 2 site so that you are not f
 
 ## Currency Systems Used
 
-### [The Free Currency Converter API](https://free.currencyconverterapi.com/)
+### [The Free Currency Converter API (V7)](https://free.currencyconverterapi.com/)
 Free edition now requires a free API key which can be obtained from the [website](https://free.currencyconverterapi.com/free-api-key) 
 
 ## Installation
