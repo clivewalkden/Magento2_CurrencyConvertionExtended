@@ -94,10 +94,7 @@ class FreeCurrencyConverterApi extends AbstractImport
         foreach ($currenciesTo as $to) {
             set_time_limit(0);
             try {
-                $key = $currencyFrom . '_' . $to;
-                $url = str_replace('{{API_KEY}}', $this->accessKey, self::CURRENCY_CONVERTER_URL);
-                $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, $url);
-                $url = str_replace('{{CURRENCY_TO}}', $to, $url);
+                $url = $this->prepareUrl($currencyFrom, $to);
                 $response = $this->getServiceResponse($url);
                 if ($currencyFrom == $to) {
                     $data[$currencyFrom][$to] = $this->_numberFormat(1);
@@ -119,6 +116,22 @@ class FreeCurrencyConverterApi extends AbstractImport
             }
         }
         return $data;
+    }
+
+    /**
+     * Prepare the URL
+     *
+     * @param float $currencyFrom
+     * @param float $currencyTo
+     * @return string $url
+     */
+    public function prepareUrl($currencyFrom, $currencyTo)
+    {
+        $url = str_replace('{{API_KEY}}', $this->accessKey, self::CURRENCY_CONVERTER_URL);
+        $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, $url);
+        $url = str_replace('{{CURRENCY_TO}}', $currencyTo, $url);
+
+        return $url;
     }
 
     /**
