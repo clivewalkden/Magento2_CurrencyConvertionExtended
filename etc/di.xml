@@ -10,6 +10,12 @@
                         Sozo\CurrencyConversionExtended\Model\Currency\Import\FreeCurrencyConverterApi
                     </item>
                 </item>
+                <item name="openRates" xsi:type="array">
+                    <item name="label" xsi:type="string">OpenRates.io</item>
+                    <item name="class" xsi:type="string">
+                        Sozo\CurrencyConversionExtended\Model\Currency\Import\OpenRates
+                    </item>
+                </item>
             </argument>
         </arguments>
     </type>

@@ -9,19 +9,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+ - OpenRates.io converter for testing
+
+
 ## [v1.1.0] - 2019-05-30
 
 ### Added
- 
  - Error checking for invalid API keys 
 
 ### Changed
-
  - Updated The Free Currency Converter to use API V7
   
 
 ## [v1.0.0] - 2019-02-15
 
 ### Added
-
  - Initial release

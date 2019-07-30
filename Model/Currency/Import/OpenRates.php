@@ -9,14 +9,14 @@ use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Currency rate import model (From https://free.currencyconverterapi.com/)
+ * Currency rate import model (From https://openrates.io/)
  */
-class FreeCurrencyConverterApi extends AbstractImport
+class OpenRates extends AbstractImport
 {
     /**
      * @var string
      */
-    const CURRENCY_CONVERTER_URL = 'https://free.currconv.com/api/v7/convert?apiKey={{API_KEY}}&q={{CURRENCY_FROM}}_{{CURRENCY_TO}}&compact=ultra';
+    const CURRENCY_CONVERTER_URL = 'https://api.exchangeratesapi.io/latest?base={{CURRENCY_FROM}}&symbols={{CURRENCY_TO}}';
 
     /**
      * Http Client Factory
@@ -31,8 +31,6 @@ class FreeCurrencyConverterApi extends AbstractImport
      * @var ScopeConfigInterface
      */
     private $scopeConfig;
-
-    protected $accessKey;
 
     /**
      * Initialize dependencies
@@ -50,11 +48,6 @@ class FreeCurrencyConverterApi extends AbstractImport
         parent::__construct($currencyFactory);
         $this->scopeConfig = $scopeConfig;
         $this->httpClientFactory = $httpClientFactory;
-
-        $this->accessKey = $this->scopeConfig->getValue(
-            'currency/currency_converter/api_key',
-            ScopeInterface::SCOPE_STORE
-        );
     }
 
     /**
@@ -85,12 +78,6 @@ class FreeCurrencyConverterApi extends AbstractImport
      */
     private function convertBatch($data, $currencyFrom, $currenciesTo)
     {
-        if (empty($this->accessKey)) {
-            $this->_messages[] = __('No API key was specified or an invalid API key was specified');
-            $data[$currencyFrom] = $this->makeEmptyResponse($currenciesTo);
-            return $data;
-        }
-
         foreach ($currenciesTo as $to) {
             set_time_limit(0);
             try {
@@ -111,10 +98,9 @@ class FreeCurrencyConverterApi extends AbstractImport
      * @param float $currencyTo
      * @return string $url
      */
-    public function prepareUrl($currencyFrom, $currencyTo)
+    protected function prepareUrl($currencyFrom, $currencyTo)
     {
-        $url = str_replace('{{API_KEY}}', $this->accessKey, self::CURRENCY_CONVERTER_URL);
-        $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, $url);
+        $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, self::CURRENCY_CONVERTER_URL);
         $url = str_replace('{{CURRENCY_TO}}', $currencyTo, $url);
 
         return $url;
@@ -138,7 +124,7 @@ class FreeCurrencyConverterApi extends AbstractImport
             )->setConfig(
                 [
                     'timeout' => $this->scopeConfig->getValue(
-                        'currency/currency_converter/timeout',
+                        'currency/open_rates/timeout',
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORE
                     ),
                 ]
@@ -165,7 +151,6 @@ class FreeCurrencyConverterApi extends AbstractImport
      */
     protected function processResponse($currencyFrom, $currencyTo, $url, $response)
     {
-
         if ($currencyFrom == $currencyTo) {
             $data[$currencyFrom][$currencyTo] = $this->_numberFormat(1);
         } else {
@@ -177,10 +162,12 @@ class FreeCurrencyConverterApi extends AbstractImport
                 $data[$currencyFrom][$currencyTo] = null;
             } else {
                 $data[$currencyFrom][$currencyTo] = $this->_numberFormat(
-                    (double)$response[$currencyFrom . '_' . $currencyTo]
+                    (double)$response['rates'][$currencyFrom]
                 );
             }
         }
+
+        return $data;
     }
 
     /**

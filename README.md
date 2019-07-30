@@ -10,7 +10,12 @@ Adds additional currency converters to your Magento 2 site so that you are not f
 ## Currency Systems Used
 
 ### [The Free Currency Converter API (V7)](https://free.currencyconverterapi.com/)
-Free edition now requires a free API key which can be obtained from the [website](https://free.currencyconverterapi.com/free-api-key) 
+Free edition now requires a free API key which can be obtained from the [website](https://free.currencyconverterapi.com/free-api-key)
+
+### [OpenRates.io](https://openrates.io)
+OpenRates delivers accurate and up-to-date exchange rate data for 32 world currencies in JSON format. All currency data is sourced from the European Central Bank and updated daily at around 4:00pm CET.
+
+The OpenRates API also offers historical exchange rates back to the year of 1999, supports HTTPS and is powered by a rock-solid infrastructure.  
 
 ## Installation
 See the [installation.md](./Guides/INSTALLATION.md) guide

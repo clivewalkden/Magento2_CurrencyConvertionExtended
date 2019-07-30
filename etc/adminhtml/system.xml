@@ -19,6 +19,16 @@
                     </comment>
                 </field>
             </group>
+            <group id="open_rates" translate="label" sortOrder="42" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>OpenRates.io</label>
+                <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Connection Timeout in Seconds</label>
+                    <comment>You can find more information in this website https://openrates.io
+                    </comment>
+                </field>
+            </group>
         </section>
     </system>
 </config>
