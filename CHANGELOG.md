@@ -10,8 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
- - OpenRates.io converter for testing
+ - OpenRates.io converter
+ - Unit Test for OpenRater.io converter
 
+### Changed
+ - Made SOZO Currency Converter admin section more obvious
+ - Added external links to the tooltip in admin sections
+ - Refactored conversion classes slightly 
+ 
 
 ## [v1.1.0] - 2019-05-30
 
