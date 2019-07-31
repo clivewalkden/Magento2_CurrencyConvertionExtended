@@ -98,7 +98,7 @@ class OpenRates extends AbstractImport
      * @param float $currencyTo
      * @return string $url
      */
-    protected function prepareUrl($currencyFrom, $currencyTo)
+    private function prepareUrl($currencyFrom, $currencyTo)
     {
         $url = str_replace('{{CURRENCY_FROM}}', $currencyFrom, self::CURRENCY_CONVERTER_URL);
         $url = str_replace('{{CURRENCY_TO}}', $currencyTo, $url);
@@ -149,7 +149,7 @@ class OpenRates extends AbstractImport
      * @param array $response
      * @return mixed
      */
-    protected function processResponse($currencyFrom, $currencyTo, $url, $response)
+    private function processResponse($currencyFrom, $currencyTo, $url, $response)
     {
         if ($currencyFrom == $currencyTo) {
             $data[$currencyFrom][$currencyTo] = $this->_numberFormat(1);
