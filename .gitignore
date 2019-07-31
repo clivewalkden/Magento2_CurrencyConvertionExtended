@@ -1,6 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 /dev/
+/vendor
+composer.lock
 
 ### SublimeText template
 # cache files for sublime text

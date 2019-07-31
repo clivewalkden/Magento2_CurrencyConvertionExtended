@@ -1,0 +1,40 @@
+version: "2"         # required to adjust maintainability checks
+checks:
+  argument-count:
+    config:
+      threshold: 20 # Magento 2 __construct can have lots of code injected
+  complex-logic:
+    config:
+      threshold: 4
+  file-lines:
+    config:
+      threshold: 250
+  method-complexity:
+    config:
+      threshold: 5
+  method-count:
+    config:
+      threshold: 20
+  method-lines:
+    config:
+      threshold: 30
+  nested-control-flow:
+    config:
+      threshold: 4
+  return-statements:
+    config:
+      threshold: 4
+  similar-code:
+    config:
+      threshold: # language-specific defaults. an override will affect all languages.
+  identical-code:
+    config:
+      threshold: # language-specific defaults. an override will affect all languages.
+plugins:
+  phpcodesniffer:
+    enabled: true
+    config:
+      standard: "PSR1,PSR2,MEQP2"
+      ignore_warnings: true
+  sonar-php:
+    enabled: true
