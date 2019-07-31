@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
  * [\[Unreleased\]](#unreleased)
+ * [\[v1.2.0\] - 2019-07-31](#v120---2019-07-31)
  * [\[v1.1.0\] - 2019-02-15](#v110---2019-05-30)
  * [\[v1.0.0\] - 2019-02-15](#v100---2019-02-15)
 
 ## [Unreleased]
+
+
+## [v1.2.0] - 2019-07-31
 
 ### Added
  - OpenRates.io converter
