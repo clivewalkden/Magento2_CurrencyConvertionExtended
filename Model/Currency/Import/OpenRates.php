@@ -83,11 +83,12 @@ class OpenRates extends AbstractImport
             try {
                 $url = $this->prepareUrl($currencyFrom, $to);
                 $response = $this->getServiceResponse($url);
-                $data = $this->processResponse($currencyFrom, $to, $url, $response);
+                $this->processResponse($data, $currencyFrom, $to, $url, $response);
             } finally {
                 ini_restore('max_execution_time');
             }
         }
+
         return $data;
     }
 
@@ -143,13 +144,14 @@ class OpenRates extends AbstractImport
     /**
      * Process the result
      *
-     * @param float $currencyFrom
-     * @param float $currencyTo
+     * @param array $data
+     * @param string $currencyFrom
+     * @param string $currencyTo
      * @param string $url
      * @param array $response
      * @return mixed
      */
-    private function processResponse($currencyFrom, $currencyTo, $url, $response)
+    private function processResponse(&$data, $currencyFrom, $currencyTo, $url, $response)
     {
         if ($currencyFrom == $currencyTo) {
             $data[$currencyFrom][$currencyTo] = $this->_numberFormat(1);
@@ -157,17 +159,13 @@ class OpenRates extends AbstractImport
             if (empty($response)) {
                 $this->_messages[] = __('We can\'t retrieve a rate from %1 for %2.', $url, $currencyTo);
                 $data[$currencyFrom][$currencyTo] = null;
-            } elseif (isset($response['status']) && $response['status'] == 400) {
+            } elseif (isset($response['error'])) {
                 $this->_messages[] = __($response['error']);
                 $data[$currencyFrom][$currencyTo] = null;
             } else {
-                $data[$currencyFrom][$currencyTo] = $this->_numberFormat(
-                    (double)$response['rates'][$currencyFrom]
-                );
+                $data[$currencyFrom][$currencyTo] = $this->_numberFormat((double)$response['rates'][$currencyTo]);
             }
         }
-
-        return $data;
     }
 
     /**

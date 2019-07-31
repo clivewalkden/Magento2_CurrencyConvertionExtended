@@ -32,6 +32,11 @@ class FreeCurrencyConverterApi extends AbstractImport
      */
     private $scopeConfig;
 
+    /**
+     * The API Key
+     *
+     * @var string
+     */
     protected $accessKey;
 
     /**
@@ -96,7 +101,7 @@ class FreeCurrencyConverterApi extends AbstractImport
             try {
                 $url = $this->prepareUrl($currencyFrom, $to);
                 $response = $this->getServiceResponse($url);
-                $data = $this->processResponse($currencyFrom, $to, $url, $response);
+                $this->processResponse($data, $currencyFrom, $to, $url, $response);
             } finally {
                 ini_restore('max_execution_time');
             }
@@ -157,15 +162,15 @@ class FreeCurrencyConverterApi extends AbstractImport
     /**
      * Process the result
      *
-     * @param float $currencyFrom
-     * @param float $currencyTo
+     * @param array $data
+     * @param string $currencyFrom
+     * @param string $currencyTo
      * @param string $url
      * @param array $response
      * @return mixed
      */
-    protected function processResponse($currencyFrom, $currencyTo, $url, $response)
+    protected function processResponse(&$data, $currencyFrom, $currencyTo, $url, $response)
     {
-
         if ($currencyFrom == $currencyTo) {
             $data[$currencyFrom][$currencyTo] = $this->_numberFormat(1);
         } else {
