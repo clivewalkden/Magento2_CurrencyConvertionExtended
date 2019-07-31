@@ -5,7 +5,7 @@
         <section id="currency">
             <group id="currency_converter" translate="label" sortOrder="41" showInDefault="1" showInWebsite="0"
                    showInStore="0">
-                <label>The Free Currency Converter API</label>
+                <label>The Free Currency Converter API (SOZO)</label>
 
                 <field id="api_key" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="0"
                        showInStore="0">
@@ -15,7 +15,23 @@
                 <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
                        showInStore="0">
                     <label>Connection Timeout in Seconds</label>
-                    <comment>You can find more information in this website https://free.currencyconverterapi.com
+                    <comment>
+                        <![CDATA[
+                        You can find more information about this free converter on the developers website <a href="https://free.currencyconverterapi.com" target="_blank">free.currencyconverterapi.com</a>
+                        ]]>
+                    </comment>
+                </field>
+            </group>
+            <group id="open_rates" translate="label" sortOrder="42" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>OpenRates.io</label>
+                <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Connection Timeout in Seconds</label>
+                    <comment>
+                        <![CDATA[
+                        You can find more information about this free converter on the developers website <a href="https://openrates.io" target="_blank">openrates.io</a>
+                        ]]>
                     </comment>
                 </field>
             </group>
