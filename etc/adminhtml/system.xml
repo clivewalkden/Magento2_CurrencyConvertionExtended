@@ -35,6 +35,21 @@
                     </comment>
                 </field>
             </group>
+
+            <group id="exchange_rates_api" translate="label" sortOrder="43" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>ExchangeRates.io</label>
+
+                <field id="timeout" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Connection Timeout in Seconds</label>
+                    <comment>
+                        <![CDATA[
+                        You can find more information about this free converter on the developers website <a href="https://exchangeratesapi.io/" target="_blank">exchangeratesapi.io</a>
+                        ]]>
+                    </comment>
+                </field>
+            </group>
         </section>
     </system>
 </config>

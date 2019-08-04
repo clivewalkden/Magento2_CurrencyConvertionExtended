@@ -10,6 +10,9 @@
             <open_rates>
                 <timeout>100</timeout>
             </open_rates>
+            <exchange_rates_api>
+                <timeout>100</timeout>
+            </exchange_rates_api>
         </currency>
     </default>
 </config>
