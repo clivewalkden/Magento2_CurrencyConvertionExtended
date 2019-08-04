@@ -9,14 +9,14 @@ use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Currency rate import model (From https://free.currencyconverterapi.com/)
+ * Currency rate import model (From https://currencylayer.com)
  */
-class FreeCurrencyConverterApi extends AbstractImport
+class CurrencyLayer extends AbstractImport
 {
     /**
      * @var string
      */
-    const CURRENCY_CONVERTER_URL = 'https://free.currconv.com/api/v7/convert?apiKey={{API_KEY}}&q={{CURRENCY_FROM}}_{{CURRENCY_TO}}&compact=ultra';
+    const URL = 'http://apilayer.net/api/live?access_key={{API_KEY}}&currencies={{CURRENCY_TO}}&source={{CURRENCY_FROM}}&format=1';
 
     /**
      * Http Client Factory
@@ -57,7 +57,7 @@ class FreeCurrencyConverterApi extends AbstractImport
         $this->httpClientFactory = $httpClientFactory;
 
         $this->accessKey = $this->scopeConfig->getValue(
-            'currency/currency_converter/api_key',
+            'currency/currency_layer/api_key',
             ScopeInterface::SCOPE_STORE
         );
     }
@@ -143,7 +143,7 @@ class FreeCurrencyConverterApi extends AbstractImport
             )->setConfig(
                 [
                     'timeout' => $this->scopeConfig->getValue(
-                        'currency/currency_converter/timeout',
+                        'currency/currency_layer/timeout',
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORE
                     ),
                 ]
@@ -182,7 +182,7 @@ class FreeCurrencyConverterApi extends AbstractImport
                 $data[$currencyFrom][$currencyTo] = null;
             } else {
                 $data[$currencyFrom][$currencyTo] = $this->_numberFormat(
-                    (double)$response[$currencyFrom . '_' . $currencyTo]
+                    (double)$response['quotes'][$currencyFrom . $currencyTo]
                 );
             }
         }

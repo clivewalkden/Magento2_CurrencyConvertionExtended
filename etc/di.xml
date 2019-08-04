@@ -16,6 +16,12 @@
                         Sozo\CurrencyConversionExtended\Model\Currency\Import\OpenRates
                     </item>
                 </item>
+                <item name="currencyLayer" xsi:type="array">
+                    <item name="label" xsi:type="string">CurrencyLayer</item>
+                    <item name="class" xsi:type="string">
+                        Sozo\CurrencyConversionExtended\Model\Currency\Import\CurrencyLayer
+                    </item>
+                </item>
             </argument>
         </arguments>
     </type>

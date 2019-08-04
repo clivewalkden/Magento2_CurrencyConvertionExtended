@@ -10,6 +10,10 @@
             <open_rates>
                 <timeout>100</timeout>
             </open_rates>
+            <currency_layer>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"></api_key>
+                <timeout>100</timeout>
+            </currency_layer>
         </currency>
     </default>
 </config>
