@@ -195,4 +195,15 @@ class FreeCurrencyConverterApi extends AbstractImport
     {
         return 1;
     }
+
+    /**
+     * Creates array for provided currencies with empty rates.
+     *
+     * @param array $currenciesTo
+     * @return array
+     */
+    private function makeEmptyResponse(array $currenciesTo): array
+    {
+        return array_fill_keys($currenciesTo, null);
+    }
 }
